@@ -1,0 +1,77 @@
+version: '2'
+
+services:
+    php:
+        build: ./docker/php74
+        volumes_from:
+            - source
+        links:
+            - db
+            - memcached
+        networks:
+            - bitrix
+        restart: always
+    web_server:
+        build: ./docker/nginx
+        depends_on:
+            - source
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:8060:80'
+            - '${INTERFACE}:443:443'
+        links:
+            - php
+        networks:
+            - bitrix
+        restart: always
+    db:
+        build: ./docker/mysql
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:33060:3306'
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        command: mysqld --sql-mode=""
+        networks:
+            - bitrix
+        restart: always
+    memcached:
+        image: memcached:1.6.12-alpine
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:11211:11211'
+        networks:
+            - bitrix
+        restart: always
+    source:
+        image: alpine:latest
+        volumes:
+            - ./_logs/nginx:/var/log/nginx
+            - ./_logs/php:/var/log/php
+            - ./_logs/db:/var/log/mysql
+            - ./_logs/memcached:/var/log/memcached
+            - db:/var/lib/mysql
+            - cache:/var/lib/memcached
+            - ./:/var/www/bitrix
+            - /etc/localtime:/etc/localtime/:ro
+        networks:
+            - bitrix
+volumes:
+    db:
+        driver: local
+    cache:
+        driver: local
+
+networks:
+    bitrix:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.10.10.0/24
