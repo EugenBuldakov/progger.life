@@ -2,7 +2,7 @@ version: '2'
 
 services:
     php:
-        build: ./docker/php74
+        build: index.html #./docker/php74
         volumes_from:
             - source
         links:
@@ -11,6 +11,8 @@ services:
         networks:
             - bitrix
         restart: always
+        ports:
+            -   8060:80
     web_server:
         build: ./docker/nginx
         depends_on:

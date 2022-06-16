@@ -1,0 +1,6 @@
+10.10.10.1 - - [16/Jun/2022:22:50:38 +0000] "GET / HTTP/1.1" 404 56 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+10.10.10.1 - - [16/Jun/2022:22:50:38 +0000] "GET /favicon.ico HTTP/1.1" 404 56 "http://localhost:8060/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+10.10.10.1 - - [16/Jun/2022:22:50:49 +0000] "GET / HTTP/1.1" 404 56 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+10.10.10.1 - - [16/Jun/2022:22:59:58 +0000] "GET / HTTP/1.1" 404 56 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+10.10.10.1 - - [16/Jun/2022:23:08:08 +0000] "GET / HTTP/1.1" 404 56 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+10.10.10.1 - - [16/Jun/2022:23:08:11 +0000] "GET / HTTP/1.1" 404 56 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
