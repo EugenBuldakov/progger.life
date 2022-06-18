@@ -1,3 +1,5 @@
-_logs
-.idea
-.env
+/_logs
+/.idea
+/.env
+/db
+/cache
