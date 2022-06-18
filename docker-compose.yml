@@ -9,7 +9,7 @@ services:
             - db
             - memcached
         networks:
-            - bitrix
+            - project
         restart: always
 
     web_server:
@@ -24,7 +24,7 @@ services:
         links:
             - php
         networks:
-            - bitrix
+            - project
         restart: always
     db:
         build: ./docker/mysql
@@ -39,7 +39,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         command: mysqld --sql-mode=""
         networks:
-            - bitrix
+            - project
         restart: always
     memcached:
         image: memcached:1.6.12-alpine
@@ -48,7 +48,7 @@ services:
         ports:
             - '${INTERFACE}:11211:11211'
         networks:
-            - bitrix
+            - project
         restart: always
     source:
         image: alpine:latest
@@ -57,12 +57,12 @@ services:
             - ./_logs/php:/var/log/php
             - ./_logs/db:/var/log/mysql
             - ./_logs/memcached:/var/log/memcached
-            - db:/var/lib/mysql
-            - cache:/var/lib/memcached
-            - ./:/var/www/bitrix
+            - ./db:/var/lib/mysql
+            - ./cache:/var/lib/memcached
+            - ./app:/var/www/html
             - /etc/localtime:/etc/localtime/:ro
         networks:
-            - bitrix
+            - project
 volumes:
     db:
         driver: local
@@ -70,7 +70,7 @@ volumes:
         driver: local
 
 networks:
-    bitrix:
+    project:
         driver: bridge
         ipam:
             driver: default
